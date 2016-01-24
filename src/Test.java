@@ -14,9 +14,6 @@ public class Test
 		int successOnFirstTry = 0, successLater = 0, fail = 0, totalNumberOfTries = 0;
 		
 		ArrayList<String> failedTests = new ArrayList<String>();
-		/*
-		System.out.println(mp.checkQuality("Of the numbers 59, 9, eighty or ninety two, which is the largest?", new String[]{"92cc227532d17e56e07902b254dfad10"}));
-		*/
 		
 		for(int i = 0; i < 1000; i++)
 		{
