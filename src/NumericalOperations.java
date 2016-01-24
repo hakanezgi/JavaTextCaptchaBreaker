@@ -163,6 +163,14 @@ public class NumericalOperations {
 		return 0;
 	}
 	
+	public static boolean isOrdinal(String text)
+	{
+		for(String s : ordinals)
+			if(text.equals(s))
+				return true;
+		
+		return false;
+	}
 }
 
 

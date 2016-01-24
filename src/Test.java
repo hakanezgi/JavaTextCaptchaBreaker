@@ -17,15 +17,13 @@ public class Test
 		
 		for(int i = 0; i < 1000; i++)
 		{
-			Thread.sleep(1000); 
+			Thread.sleep(1000); /* sleep for 1 second to get a new test */
 			
 			String[] test = getNewTest();
 			String[] answers = new String[test.length - 1];
 			
 			for(int j = 1; j < test.length; j++)
 				answers[j-1] = test[j];
-			
-			
 			
 			if(!mp.checkQuality(test[0], answers))
 			{
@@ -81,5 +79,4 @@ public class Test
 		
 		return newTest;
 	}
-	
 }

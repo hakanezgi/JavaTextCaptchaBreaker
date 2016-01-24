@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 
 
@@ -5,13 +6,20 @@ public class WhichNumberPattern {
 
 	public static String solve(String question, MainProg mp) {
 		
+		if(question.indexOf("digit") > -1)
+			return null;
+		
 		try{
+			ArrayList<Integer> al = Numbers.findAllNumbersInText(question);
 			
-			findNumbersInList(question, mp);
-			int[] numbers = listToNumbers(mp);
-						
+			int[] numbers = new int[al.size()];
+			
+			for(int i = 0; i < numbers.length; i++){
+				numbers[i] = al.get(i);
+				mp.al.add(al.get(i) + "");
+			}
 			String toReturn = null;
-			int position = 0;											
+			int position = -1;
 			
 			String[] tokens = question.toLowerCase().split(" ");
 			
@@ -28,12 +36,12 @@ public class WhichNumberPattern {
 			else
 			{
 				for(String token : tokens)
-				{									
+				{
 					for(int i = 0; i < NumericalOperations.ordinals.length; i++)
-						if(token.equals(NumericalOperations.ordinals[i]))
+						if(token.equals(NumericalOperations.ordinals[i])){
 							position = (int) Math.floor(i/2.0);
+						}
 				}
-							
 				toReturn = "" + numbers[position];
 			}
 			
@@ -42,6 +50,7 @@ public class WhichNumberPattern {
 		catch(Exception e) {return null;}
 	}
 
+	@SuppressWarnings("unused")
 	private static int[] listToNumbers(MainProg mp) {
 
 		int[] numbers = new int[mp.al.size()];
@@ -54,7 +63,8 @@ public class WhichNumberPattern {
 		
 		return numbers;
 	}
-
+	
+	@SuppressWarnings("unused")
 	private static void findNumbersInList(String question, MainProg mp) {
 
 		question = question.replaceAll("[^\\d|^\\w|^\\s|^ç|^ð|^ý|^ö|^þ|^ü|^Ç|^Ð|^Ý|^Ö|^Þ|^Ü|^,]*", "");

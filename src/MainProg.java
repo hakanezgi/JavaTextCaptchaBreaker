@@ -21,14 +21,14 @@ public class MainProg {
 				answer = ColorPattern.solve(question, this);
 			if ((answer == null) && ((question.indexOf("body") > -1) || (question.indexOf("part") > -1)))
 				answer = BodyPattern.solve(question, this);
+			if ((answer == null) && ((question.indexOf("largest") > -1) || (question.indexOf("highest") > -1) || (question.indexOf("smallest") > -1) || (question.indexOf("lowest") > -1) || (question.indexOf("biggest") > -1) || (question.indexOf("number") > -1)))
+				answer = WhichNumberPattern.solve(question, this);
 			if ((answer == null) && ((question.indexOf("digit") > -1) || (question.indexOf("number") > -1)))
 				answer = Numbers.solveNumberOrder(question);
 			if ((answer == null) && ((question.indexOf("digit") > -1) || (question.indexOf("number") > -1)))
 				answer = Numbers.solveStringToNumber(question);
 			if ((answer == null) && ((question.indexOf("plus") > -1) || (question.indexOf("add") > -1) || (question.indexOf("+") > -1) || (question.indexOf("minus") > -1) || (question.indexOf("subtract") > -1) || (question.indexOf("-") > -1)))
 				answer = AddSubtractPattern.solve(question);
-			if ((answer == null) && ((question.indexOf("largest") > -1) || (question.indexOf("highest") > -1) || (question.indexOf("smallest") > -1) || (question.indexOf("lowest") > -1) || (question.indexOf("biggest") > -1) || (question.indexOf("sayý") > -1)))
-				answer = WhichNumberPattern.solve(question, this);
 			if ((answer == null) && ((question.indexOf("day") > -1) || (question.indexOf("tomorrow") > -1) || (question.indexOf("weekend") > -1)))
 				answer = DayPattern.solve(question, this); 
 			if ((answer == null) && ((question.indexOf("letter") > -1) || (question.indexOf("length") > -1) || (question.indexOf("capital") > -1) || (question.indexOf("contain") > -1) || (question.indexOf("begin") > -1) || (question.indexOf("starting") > -1)))
@@ -50,11 +50,13 @@ public class MainProg {
 			
 			numberOfTriedAnswers = 0;
 			
-			for(String aRealAnswer : allRealAnswers){
+			for(String aRealAnswer : allRealAnswers)
+			{
 				if ((answer != null && md5Hash(answer.toLowerCase()).trim().equalsIgnoreCase(aRealAnswer.trim())))
 					return false;
 				
-				for(String a : al){
+				for(String a : al)
+				{
 					numberOfTriedAnswers++;
 					
 					if (md5Hash(a.toLowerCase()).trim().equalsIgnoreCase(aRealAnswer.trim()))
@@ -67,7 +69,8 @@ public class MainProg {
 		
 		catch(Exception ex){ex.printStackTrace(); return true;}
 	}
-/*
+
+	@SuppressWarnings("unused")
 	private boolean checkIfAnswerIsInQuestion(String question, String realAnswer) {
 		
 		question = " " + question.toLowerCase().replaceAll("ý", "i").replaceAll("[^\\d|^\\w|^\\s]*", "").trim() + " ";
@@ -95,7 +98,7 @@ public class MainProg {
 			
 		return flag;
 	}
-*/
+
 	private void getList(String question) {
 
 		try {
@@ -239,14 +242,5 @@ public class MainProg {
 			sb.append(String.format("%02x", byteData[i] & 0xff));
 		
 		return sb.toString();
-	}
-	
-	public static String toHex(byte[] in) {
-		StringBuilder out = new StringBuilder(in.length * 2);
-		for (byte b: in) {
-			out.append(String.format("%02X", (byte) b));
-		}
-		
-		return out.toString();
 	}
 }
